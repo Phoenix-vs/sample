@@ -10,8 +10,10 @@
 </head>
 <body>
     @include('layouts._header')
+    @include('shared._message')
     @yield('content')
     @include('layouts._footer')
     <script src="{{mix('js/app.js')}}"></script>
+    @yield('subjs')
 </body>
 </html>

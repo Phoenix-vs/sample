@@ -19,9 +19,10 @@
     <title>Document</title>
 </head>
 <body>
-    {{ route('users.show', 1) }} <img src="{{ $user->gravatar() }}">
     <div class="container">
+        <img src="{{ $user->gravatar() }}">
         @include('shared._message')
+        <h3>{{ $user->name }}</h3>
     </div>
 </body>
 </html>
