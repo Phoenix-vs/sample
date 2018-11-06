@@ -8,6 +8,22 @@ use App\Models\User;
 class UsersController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => ['show', 'create', 'store']
+        ]);
+        $this->middleware('guest', [
+            'only' => ['create']
+        ]);
+    }
+
+    public function index()
+    {
+        $users = User::where('id', '>', 10)->paginate(10);
+        return view('users.index', compact('users'));
+    }
+
     public function show(User $user)
     {
         return view('users.show', compact('user') );
@@ -33,4 +49,34 @@ class UsersController extends Controller
     }
 
 
+    public function edit($userid)
+    {
+        return view('users.edit', compact('userid'));
+    }
+
+    public function update(Request $request)
+    {
+        $user = $request->user();
+        $this->authorize('update', $user);
+        $this->validate($request, [
+            'name' => 'nullable|min:3|max:50',
+            'password' => 'nullable|confirmed|min:6|'
+        ]);
+        $name = $request->name;
+        $password = bcrypt($request->password);
+
+        $name ? $user->name = $name : $password ;
+        $password ? $user->password = $password : $password ;
+        $user->save();
+        session()->flash('success', '资料更新成功');
+        return redirect()->route('users.show', compact('user'));
+    }
+
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        session()->flash('success', '用户' . $user->name . '已删除！');
+        return redirect()->back();
+    }
 }

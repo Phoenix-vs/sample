@@ -10,12 +10,21 @@ use Auth;
 class SessionsController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('guest', [
+           'only' => ['create']
+        ]);
+    }
+
+
     public function create()
     {
-        if (!Auth::check())
+        if (!Auth::check()) {
             return view('session.create');
-        else
+        }else {
             return redirect()->route('home');
+        }
     }
 
     public function store(SessionLoginRequest $request)
@@ -29,6 +38,7 @@ class SessionsController extends Controller
             return redirect()->route('home');
         } else {
             session()->flash('danger', '登陆失败');
+            return redirect()->back();
         }
     }
 

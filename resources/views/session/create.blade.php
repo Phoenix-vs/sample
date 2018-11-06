@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                         <label for="RememberMe">记住我</label>
-                        <input type="checkbox" checked="checked" id="RememberMe" name="remember">
+                        <input type="checkbox" id="RememberMe" name="remember">
                 </div>
                 <input type="submit" value="登陆" class="btn btn-primary" >
             </form>

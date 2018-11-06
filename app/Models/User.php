@@ -27,6 +27,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $cast = [
+        'is_admin' => 'boolean',
+    ];
 
     public function gravatar($size = '100')
     {

@@ -27,3 +27,7 @@ Route::post('login', 'SessionsController@store')->name('login');
 Route::delete('logout', 'SessionsController@destroy')->name('logout');
 
 //Route::get(['middleware' => 'auth'] , )
+//Route::group(['middleware' => 'auth'], function () {
+Route::get('users/{userid}/edit', 'UsersController@edit')->name('users.edit');
+
+//});
