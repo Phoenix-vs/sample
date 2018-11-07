@@ -21,6 +21,11 @@
                 <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary"> 编辑个人资料</a>
             </div>
         </div>
+@else
+    <div class="col-md-2 pull-right">
+        <a href="{{ route('login') }}" class="btn btn-primary">登陆</a>
+    </div>
+    
 @endif
 </nav>
 

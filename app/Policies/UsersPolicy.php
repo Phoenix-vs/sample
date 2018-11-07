@@ -24,4 +24,9 @@ class UsersPolicy
     {
         return $currentUser->id == $user->id;
     }
+
+    public function confirmEmail(User $currentUser, User $user)
+    {
+        return $currentUser->id == $user->id;
+    }
 }

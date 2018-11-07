@@ -27,7 +27,9 @@ Route::post('login', 'SessionsController@store')->name('login');
 Route::delete('logout', 'SessionsController@destroy')->name('logout');
 
 //Route::get(['middleware' => 'auth'] , )
-//Route::group(['middleware' => 'auth'], function () {
 Route::get('users/{userid}/edit', 'UsersController@edit')->name('users.edit');
+Route::get('signup/confirm/{token}', 'UsersController@confirmEmail')->name('users.confirm');
+Route::get('to_confirm', 'UsersController@sendConfirmMail')->name('users.to_confirm');
+Route::get('confirm/send_mail', 'UsersController@sendMail')->name('users.send');
 
-//});
+Route::resource('statuses', 'StatusesController')->only(['create', 'store', 'destroy', 'update', 'index']);
